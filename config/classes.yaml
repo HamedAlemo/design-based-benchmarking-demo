@@ -26,13 +26,77 @@ reference:
     "Tree Canopy over Impervious Structures": 2
     "Tree Canopy over Other Impervious": 2
     "Tree Canopy over Impervious Roads": 2
+    "Shrubland": 3   # 2024-edition name of Scrub/Shrub; approved by the PI 2026-11-15 (DECISIONS.md)
   # Names that may appear with slightly different wording. M1 may normalize case, punctuation and "Surfaces"
   # suffixes, and must log every normalization in docs/DECISIONS.md.
   allow_name_normalization: true
   # If the release has no separate LC raster, M1 derives the 5 classes from the LULC raster using the data
   # dictionary's land cover parent of each LULC class, writes the full mapping here under `lulc_to_harmonized`,
   # and records the decision. This is a human gate only if any LULC class has no clear land cover parent.
-  lulc_to_harmonized: null
+  lulc_to_harmonized:   # filled by M1 from lulc_visualization_crosswalk-2024-edition.csv (lc column); see DECISIONS.md
+    # code: [harmonized, "LULC name", "LC parent"]
+    10: [1, "Tidal Waters", "Water"]
+    11: [1, "Lakes and Reservoirs", "Water"]
+    12: [1, "Riverine Ponds", "Water"]
+    13: [1, "Terrene Ponds", "Water"]
+    14: [1, "Streams and Rivers", "Water"]
+    15: [4, "Bare Shore", "Barren"]
+    20: [5, "Roads", "Impervious Roads"]
+    21: [5, "Structures", "Impervious Structures"]
+    22: [5, "Other Impervious", "Other Impervious"]
+    23: [2, "Tree Canopy Over Roads", "Tree Canopy Over Impervious Roads"]
+    24: [2, "Tree Canopy Over Structures", "Tree Canopy Over Impervious Structures"]
+    25: [2, "Tree Canopy Over Other Impervious", "Tree Canopy Over Other Impervious"]
+    26: [2, "Tree Canopy Over Turf Grass", "Tree Canopy"]
+    27: [3, "Turf Grass", "Low Vegetation"]
+    28: [4, "Bare Developed", "Barren"]
+    30: [4, "Extractive Barren", "Barren"]
+    31: [5, "Extractive Impervious", "Other Impervious"]
+    32: [5, "Solar Field Panel Arrays", "Other Impervious"]
+    33: [4, "Solar Field Barren", "Barren"]
+    34: [3, "Solar Field Herbaceous", "Low Vegetation"]
+    35: [3, "Solar Field Shrubland", "Shrubland"]
+    36: [4, "Suspended Succession Barren", "Barren"]
+    37: [3, "Suspended Succession Herbaceous", "Low Vegetation"]
+    38: [3, "Suspended Succession Shrubland", "Shrubland"]
+    40: [2, "Forest", "Tree Canopy"]
+    41: [2, "Forested Other", "Tree Canopy"]
+    42: [4, "Natural Succession Barren", "Barren"]
+    43: [3, "Natural Succession Herbaceous", "Low Vegetation"]
+    44: [3, "Natural Succession Shrubland", "Shrubland"]
+    45: [4, "Harvested Forest Barren", "Barren"]
+    46: [3, "Harvested Forest Herbaceous", "Low Vegetation"]
+    50: [4, "Riverine Wetlands Barren", "Barren"]
+    51: [3, "Riverine Wetlands Herbaceous", "Low Vegetation"]
+    52: [3, "Riverine Wetlands Shrubland", "Shrubland"]
+    53: [2, "Riverine Wetlands Forested Other", "Tree Canopy"]
+    54: [2, "Riverine Wetlands Forest", "Tree Canopy"]
+    55: [3, "Riverine Wetlands Harvested Forest", "Low Vegetation"]
+    60: [4, "Terrene Wetlands Barren", "Barren"]
+    61: [3, "Terrene Wetlands Herbaceous", "Low Vegetation"]
+    62: [3, "Terrene Wetlands Shrubland", "Shrubland"]
+    63: [2, "Terrene Wetlands Forested Other", "Tree Canopy"]
+    64: [2, "Terrene Wetlands Forest", "Tree Canopy"]
+    65: [3, "Terrene Wetlands Harvested Forest", "Low Vegetation"]
+    70: [4, "Tidal Wetlands Barren", "Barren"]
+    71: [3, "Tidal Wetlands Herbaceous", "Low Vegetation"]
+    72: [3, "Tidal Wetlands Shrubland", "Shrubland"]
+    73: [2, "Tidal Wetlands Forested Other", "Tree Canopy"]
+    74: [2, "Tidal Wetlands Forest", "Tree Canopy"]
+    75: [3, "Tidal Wetlands Harvested Forest", "Low Vegetation; Barren"]
+    80: [4, "Cropland Barren", "Barren"]
+    81: [3, "Cropland Herbaceous", "Low Vegetation"]
+    82: [4, "Orchards and Vineyards Barren", "Barren"]
+    83: [3, "Orchards and Vineyards Herbaceous", "Low Vegetation"]
+    84: [3, "Orchards and Vineyards Shrubland", "Shrubland"]
+    85: [4, "Pasture and Hay Barren", "Barren"]
+    86: [3, "Pasture and Hay Herbaceous", "Low Vegetation"]
+    90: [5, "Agricultural Structures", "Impervious Structures"]
+    91: [5, "Animal Operation Impervious", "Other Impervious"]
+    92: [4, "Animal Operation Barren", "Barren"]
+    93: [3, "Animal Operation Herbaceous", "Low Vegetation"]
+    94: [2, "Tree Canopy over Agricultural Structure", "Tree Canopy Over Impervious Structures"]
+    95: [2, "Tree Canopy over Animal Operation Impervious", "Tree Canopy Over Other Impervious"]
   observed_codes: null   # filled by M1: {code: "name"}
   nodata: null           # filled by M1
 

@@ -4,7 +4,7 @@ One line per milestone and extent. Claude Code updates this after every step.
 
 | Milestone | dev | full | Notes |
 | --- | --- | --- | --- |
-| M0 Setup | not started | n/a | |
+| M0 Setup | done | n/a | Earth Engine credentials pending (PI authenticating) |
 | M1 Data and grid | not started | not started | |
 | M2 Cell table, frames, truth | not started | not started | |
 | M3 Estimators and validation | not started | n/a | Validation runs on synthetic test populations and the dev cell table |

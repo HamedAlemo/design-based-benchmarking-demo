@@ -29,3 +29,11 @@ Every choice that shapes the results, with its reason. Claude Code appends entri
 ## Entries added during development
 
 (Claude Code appends below.)
+
+| # | Date | Decision | Reason | Expected effect |
+| --- | --- | --- | --- | --- |
+| 15 | 2026-11-15 | Reference rasters are the 2024-edition county LULC GeoTIFFs (`*_lulc_2021_2024-Edition.tif`); harmonized classes are derived from the release's own static crosswalk `lulc_visualization_crosswalk-2024-edition.csv` (column `lc`, the 11-class land cover parent). Mapping written to `config/classes.yaml` `lulc_to_harmonized`. | The 2024 edition has no stand-alone LC raster (User Guide, "Data Organization and Structure"). M1 step 2. | None beyond the protocol's intent: the LC parent is the release's own land cover attribution. |
+| 16 | 2026-11-15 | LC parent "Shrubland" mapped to harmonized 3 (low vegetation). Approved by the PI in chat. | 2024-edition name for the 2022-edition "Scrub/Shrub" class (protocol section 2 merges it into low vegetation). Not a case or punctuation normalization, so it went to the human gate. | None. |
+| 17 | 2026-11-15 | LULC 75 "Tidal Wetlands Harvested Forest" (LC parent listed as "Low Vegetation; Barren") mapped to 3. Approved by the PI in chat. | Two parents listed. The riverine and terrene harvested-forest wetland codes (55, 65) have parent Low Vegetation only. M1 reports its pixel count. | Negligible if the class is rare (count reported in M1). |
+| 18 | 2026-11-15 | LC parent names matched to `name_to_harmonized` case-insensitively ("Tree Canopy Over ..." vs "Tree Canopy over ..."). | Allowed normalization (`allow_name_normalization: true`). | None. |
+| 19 | 2026-11-15 | Reference files downloaded from the ScienceBase public publish bucket `https://prod-is-usgs-sb-prod-publish.s3.amazonaws.com/<item id>/<file name>` (the S3 key listed in each ScienceBase file record). | The `sciencebase.usgs.gov/manager/...` URLs in the item JSON return an HTML application, not the file. Same bytes, same release. | None. |
