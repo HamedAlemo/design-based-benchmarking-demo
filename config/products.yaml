@@ -17,7 +17,7 @@ models:
     label: "Dynamic World V1, 2021 annual mode of label"
     access: earth_engine
     gee_collection: "GOOGLE/DYNAMICWORLD/V1"
-    gee_project: null           # set here or via env GEE_PROJECT
+    gee_project: "hamed-gee"    # set here or via env GEE_PROJECT
     date_start: "2021-01-01"
     date_end: "2022-01-01"      # exclusive
     band: "label"

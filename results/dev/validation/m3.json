@@ -1,0 +1,765 @@
+{
+  "synthetic": {
+    "n_cells": 192,
+    "z_crit": 4.046075984119395,
+    "n_fail": 0,
+    "n_raw_beyond_3mcse": 13,
+    "raw_beyond_3mcse": [
+      {
+        "design": "element",
+        "n": 500,
+        "model": 2,
+        "parameter": "UA_2",
+        "bias": -0.000378,
+        "pred_bias": 6e-06,
+        "mcse": 0.000114,
+        "resid_mcse": -3.374077
+      },
+      {
+        "design": "cluster",
+        "n": 40,
+        "model": 0,
+        "parameter": "UA_1",
+        "bias": -0.000997,
+        "pred_bias": -0.001033,
+        "mcse": 0.00024,
+        "resid_mcse": 0.15064
+      },
+      {
+        "design": "cluster",
+        "n": 40,
+        "model": 0,
+        "parameter": "UA_3",
+        "bias": -0.000253,
+        "pred_bias": -0.000293,
+        "mcse": 6.2e-05,
+        "resid_mcse": 0.648249
+      },
+      {
+        "design": "cluster",
+        "n": 40,
+        "model": 0,
+        "parameter": "UA_5",
+        "bias": -0.001113,
+        "pred_bias": -0.00097,
+        "mcse": 0.000212,
+        "resid_mcse": -0.670714
+      },
+      {
+        "design": "cluster",
+        "n": 40,
+        "model": 1,
+        "parameter": "UA_1",
+        "bias": -0.001126,
+        "pred_bias": -0.001149,
+        "mcse": 0.000258,
+        "resid_mcse": 0.088929
+      },
+      {
+        "design": "cluster",
+        "n": 40,
+        "model": 1,
+        "parameter": "UA_3",
+        "bias": -0.000204,
+        "pred_bias": -0.000303,
+        "mcse": 6.5e-05,
+        "resid_mcse": 1.525878
+      },
+      {
+        "design": "cluster",
+        "n": 40,
+        "model": 1,
+        "parameter": "UA_5",
+        "bias": -0.001366,
+        "pred_bias": -0.001218,
+        "mcse": 0.000242,
+        "resid_mcse": -0.612816
+      },
+      {
+        "design": "cluster",
+        "n": 40,
+        "model": 2,
+        "parameter": "UA_1",
+        "bias": -0.000915,
+        "pred_bias": -0.001018,
+        "mcse": 0.000247,
+        "resid_mcse": 0.414327
+      },
+      {
+        "design": "cluster",
+        "n": 40,
+        "model": 2,
+        "parameter": "UA_2",
+        "bias": -0.000248,
+        "pred_bias": -0.00028,
+        "mcse": 7.9e-05,
+        "resid_mcse": 0.410405
+      },
+      {
+        "design": "cluster",
+        "n": 40,
+        "model": 2,
+        "parameter": "UA_3",
+        "bias": -0.000203,
+        "pred_bias": -0.000241,
+        "mcse": 6.8e-05,
+        "resid_mcse": 0.560629
+      },
+      {
+        "design": "cluster",
+        "n": 40,
+        "model": 2,
+        "parameter": "UA_5",
+        "bias": -0.001025,
+        "pred_bias": -0.000899,
+        "mcse": 0.000213,
+        "resid_mcse": -0.593705
+      },
+      {
+        "design": "cluster",
+        "n": 80,
+        "model": 0,
+        "parameter": "UA_4",
+        "bias": -0.001358,
+        "pred_bias": -0.000705,
+        "mcse": 0.000302,
+        "resid_mcse": -2.16489
+      },
+      {
+        "design": "cluster",
+        "n": 80,
+        "model": 1,
+        "parameter": "UA_4",
+        "bias": -0.001044,
+        "pred_bias": -0.00053,
+        "mcse": 0.000281,
+        "resid_mcse": -1.833
+      }
+    ],
+    "oa": [
+      {
+        "design": "element",
+        "n": 500,
+        "model": 0,
+        "bias": 8e-05,
+        "mcse": 0.0001,
+        "var_ratio": 1.00154,
+        "coverage": 0.94725
+      },
+      {
+        "design": "element",
+        "n": 500,
+        "model": 1,
+        "bias": -1e-05,
+        "mcse": 0.0001,
+        "var_ratio": 0.98793,
+        "coverage": 0.94165
+      },
+      {
+        "design": "element",
+        "n": 500,
+        "model": 2,
+        "bias": -0.00011,
+        "mcse": 0.0001,
+        "var_ratio": 1.01035,
+        "coverage": 0.9426
+      },
+      {
+        "design": "element",
+        "n": 2000,
+        "model": 0,
+        "bias": -5e-05,
+        "mcse": 5e-05,
+        "var_ratio": 1.00023,
+        "coverage": 0.9472
+      },
+      {
+        "design": "element",
+        "n": 2000,
+        "model": 1,
+        "bias": -0.00015,
+        "mcse": 5e-05,
+        "var_ratio": 0.99223,
+        "coverage": 0.9499
+      },
+      {
+        "design": "element",
+        "n": 2000,
+        "model": 2,
+        "bias": -2e-05,
+        "mcse": 5e-05,
+        "var_ratio": 0.99731,
+        "coverage": 0.94895
+      },
+      {
+        "design": "cluster",
+        "n": 40,
+        "model": 0,
+        "bias": 3e-05,
+        "mcse": 0.00011,
+        "var_ratio": 0.97541,
+        "coverage": 0.91925
+      },
+      {
+        "design": "cluster",
+        "n": 40,
+        "model": 1,
+        "bias": 1e-05,
+        "mcse": 0.00012,
+        "var_ratio": 0.97552,
+        "coverage": 0.92355
+      },
+      {
+        "design": "cluster",
+        "n": 40,
+        "model": 2,
+        "bias": 3e-05,
+        "mcse": 0.00012,
+        "var_ratio": 0.97612,
+        "coverage": 0.91645
+      },
+      {
+        "design": "cluster",
+        "n": 80,
+        "model": 0,
+        "bias": 2e-05,
+        "mcse": 7e-05,
+        "var_ratio": 0.98743,
+        "coverage": 0.9362
+      },
+      {
+        "design": "cluster",
+        "n": 80,
+        "model": 1,
+        "bias": 0.0,
+        "mcse": 8e-05,
+        "var_ratio": 0.99192,
+        "coverage": 0.94035
+      },
+      {
+        "design": "cluster",
+        "n": 80,
+        "model": 2,
+        "bias": 7e-05,
+        "mcse": 8e-05,
+        "var_ratio": 0.9869,
+        "coverage": 0.9361
+      }
+    ],
+    "naive_oa": [
+      {
+        "n": 40,
+        "model": 0,
+        "coverage": 0.3395
+      },
+      {
+        "n": 40,
+        "model": 1,
+        "coverage": 0.3453
+      },
+      {
+        "n": 40,
+        "model": 2,
+        "coverage": 0.3333
+      },
+      {
+        "n": 80,
+        "model": 0,
+        "coverage": 0.3676
+      },
+      {
+        "n": 80,
+        "model": 1,
+        "coverage": 0.3734
+      },
+      {
+        "n": 80,
+        "model": 2,
+        "coverage": 0.3572
+      }
+    ],
+    "bootstrap_over_linear": [
+      0.9987834839123055,
+      0.996493116184887,
+      0.9976317050090641
+    ]
+  },
+  "r_check_max_rel_diff": {
+    "estimate": 4.71817906847983e-15,
+    "se": 3.410152825075148e-14
+  },
+  "real_data": {
+    "draws": 5000,
+    "oa": [
+      {
+        "arm": "A0w",
+        "budget": 5,
+        "model": "dynamic_world_2021",
+        "parameter": "OA",
+        "R_def": 5000,
+        "truth": 0.84485,
+        "bias": -0.00031,
+        "mcse": 0.00017,
+        "bias_mcse": -1.81529,
+        "se_ratio": 0.93787,
+        "coverage": 0.9076
+      },
+      {
+        "arm": "A0w",
+        "budget": 5,
+        "model": "esri_io_2021",
+        "parameter": "OA",
+        "R_def": 5000,
+        "truth": 0.85979,
+        "bias": -0.00052,
+        "mcse": 0.00021,
+        "bias_mcse": -2.46604,
+        "se_ratio": 0.93425,
+        "coverage": 0.901
+      },
+      {
+        "arm": "A0w",
+        "budget": 5,
+        "model": "worldcover_2021",
+        "parameter": "OA",
+        "R_def": 5000,
+        "truth": 0.89361,
+        "bias": -9e-05,
+        "mcse": 0.00011,
+        "bias_mcse": -0.83344,
+        "se_ratio": 0.94769,
+        "coverage": 0.907
+      },
+      {
+        "arm": "D",
+        "budget": 1000,
+        "model": "dynamic_world_2021",
+        "parameter": "OA",
+        "R_def": 5000,
+        "truth": 0.84485,
+        "bias": -2e-05,
+        "mcse": 0.00014,
+        "bias_mcse": -0.16431,
+        "se_ratio": 0.99833,
+        "coverage": 0.945
+      },
+      {
+        "arm": "D",
+        "budget": 1000,
+        "model": "esri_io_2021",
+        "parameter": "OA",
+        "R_def": 5000,
+        "truth": 0.85979,
+        "bias": -0.00013,
+        "mcse": 0.00014,
+        "bias_mcse": -0.91418,
+        "se_ratio": 1.00225,
+        "coverage": 0.9452
+      },
+      {
+        "arm": "D",
+        "budget": 1000,
+        "model": "worldcover_2021",
+        "parameter": "OA",
+        "R_def": 5000,
+        "truth": 0.89361,
+        "bias": -8e-05,
+        "mcse": 0.00014,
+        "bias_mcse": -0.52635,
+        "se_ratio": 0.98768,
+        "coverage": 0.9412
+      }
+    ],
+    "oa_bias_within_3mcse": true,
+    "oa_coverage_in_band": false,
+    "all_params_beyond_3mcse": [
+      {
+        "arm": "A0w",
+        "model": "dynamic_world_2021",
+        "parameter": "PA_1",
+        "R_def": 5000,
+        "bias": -0.034587,
+        "mcse": 0.001735,
+        "bias_mcse": -19.936544
+      },
+      {
+        "arm": "A0w",
+        "model": "dynamic_world_2021",
+        "parameter": "PA_2",
+        "R_def": 5000,
+        "bias": -0.000697,
+        "mcse": 9.9e-05,
+        "bias_mcse": -7.041376
+      },
+      {
+        "arm": "A0w",
+        "model": "dynamic_world_2021",
+        "parameter": "PA_3",
+        "R_def": 5000,
+        "bias": -0.00128,
+        "mcse": 0.000356,
+        "bias_mcse": -3.596022
+      },
+      {
+        "arm": "A0w",
+        "model": "dynamic_world_2021",
+        "parameter": "PA_4",
+        "R_def": 5000,
+        "bias": -0.019598,
+        "mcse": 0.001354,
+        "bias_mcse": -14.471232
+      },
+      {
+        "arm": "A0w",
+        "model": "dynamic_world_2021",
+        "parameter": "PA_5",
+        "R_def": 5000,
+        "bias": -0.005,
+        "mcse": 0.000712,
+        "bias_mcse": -7.023106
+      },
+      {
+        "arm": "A0w",
+        "model": "dynamic_world_2021",
+        "parameter": "UA_3",
+        "R_def": 5000,
+        "bias": -9.6e-05,
+        "mcse": 2.8e-05,
+        "bias_mcse": -3.470603
+      },
+      {
+        "arm": "A0w",
+        "model": "dynamic_world_2021",
+        "parameter": "UA_4",
+        "R_def": 4980,
+        "bias": -0.039309,
+        "mcse": 0.002665,
+        "bias_mcse": -14.74961
+      },
+      {
+        "arm": "A0w",
+        "model": "dynamic_world_2021",
+        "parameter": "UA_5",
+        "R_def": 5000,
+        "bias": -0.001541,
+        "mcse": 0.000334,
+        "bias_mcse": -4.608882
+      },
+      {
+        "arm": "A0w",
+        "model": "dynamic_world_2021",
+        "parameter": "area_1",
+        "R_def": 5000,
+        "bias": 0.000224,
+        "mcse": 5.3e-05,
+        "bias_mcse": 4.216376
+      },
+      {
+        "arm": "A0w",
+        "model": "esri_io_2021",
+        "parameter": "PA_1",
+        "R_def": 5000,
+        "bias": -0.042821,
+        "mcse": 0.002097,
+        "bias_mcse": -20.422075
+      },
+      {
+        "arm": "A0w",
+        "model": "esri_io_2021",
+        "parameter": "PA_2",
+        "R_def": 5000,
+        "bias": -0.001451,
+        "mcse": 0.000212,
+        "bias_mcse": -6.854057
+      },
+      {
+        "arm": "A0w",
+        "model": "esri_io_2021",
+        "parameter": "PA_3",
+        "R_def": 5000,
+        "bias": -0.001309,
+        "mcse": 0.000337,
+        "bias_mcse": -3.88469
+      },
+      {
+        "arm": "A0w",
+        "model": "esri_io_2021",
+        "parameter": "PA_4",
+        "R_def": 5000,
+        "bias": -0.009298,
+        "mcse": 0.000709,
+        "bias_mcse": -13.108133
+      },
+      {
+        "arm": "A0w",
+        "model": "esri_io_2021",
+        "parameter": "PA_5",
+        "R_def": 5000,
+        "bias": -0.006311,
+        "mcse": 0.00084,
+        "bias_mcse": -7.512191
+      },
+      {
+        "arm": "A0w",
+        "model": "esri_io_2021",
+        "parameter": "UA_1",
+        "R_def": 5000,
+        "bias": 0.004679,
+        "mcse": 0.000584,
+        "bias_mcse": 8.014098
+      },
+      {
+        "arm": "A0w",
+        "model": "esri_io_2021",
+        "parameter": "UA_3",
+        "R_def": 5000,
+        "bias": -0.000175,
+        "mcse": 4.4e-05,
+        "bias_mcse": -4.006761
+      },
+      {
+        "arm": "A0w",
+        "model": "esri_io_2021",
+        "parameter": "UA_4",
+        "R_def": 4676,
+        "bias": -0.009732,
+        "mcse": 0.002705,
+        "bias_mcse": -3.597196
+      },
+      {
+        "arm": "A0w",
+        "model": "esri_io_2021",
+        "parameter": "area_1",
+        "R_def": 5000,
+        "bias": 0.000224,
+        "mcse": 5.3e-05,
+        "bias_mcse": 4.216376
+      },
+      {
+        "arm": "A0w",
+        "model": "worldcover_2021",
+        "parameter": "PA_1",
+        "R_def": 5000,
+        "bias": -0.0322,
+        "mcse": 0.001709,
+        "bias_mcse": -18.844169
+      },
+      {
+        "arm": "A0w",
+        "model": "worldcover_2021",
+        "parameter": "PA_2",
+        "R_def": 5000,
+        "bias": -0.000273,
+        "mcse": 3.7e-05,
+        "bias_mcse": -7.405835
+      },
+      {
+        "arm": "A0w",
+        "model": "worldcover_2021",
+        "parameter": "PA_4",
+        "R_def": 5000,
+        "bias": -0.014386,
+        "mcse": 0.001091,
+        "bias_mcse": -13.182603
+      },
+      {
+        "arm": "A0w",
+        "model": "worldcover_2021",
+        "parameter": "PA_5",
+        "R_def": 5000,
+        "bias": -0.004199,
+        "mcse": 0.000626,
+        "bias_mcse": -6.708606
+      },
+      {
+        "arm": "A0w",
+        "model": "worldcover_2021",
+        "parameter": "UA_1",
+        "R_def": 5000,
+        "bias": -0.002251,
+        "mcse": 0.000286,
+        "bias_mcse": -7.876508
+      },
+      {
+        "arm": "A0w",
+        "model": "worldcover_2021",
+        "parameter": "UA_2",
+        "R_def": 5000,
+        "bias": -0.000508,
+        "mcse": 0.000158,
+        "bias_mcse": -3.219072
+      },
+      {
+        "arm": "A0w",
+        "model": "worldcover_2021",
+        "parameter": "UA_3",
+        "R_def": 5000,
+        "bias": -0.000354,
+        "mcse": 7.9e-05,
+        "bias_mcse": -4.485776
+      },
+      {
+        "arm": "A0w",
+        "model": "worldcover_2021",
+        "parameter": "UA_4",
+        "R_def": 5000,
+        "bias": -0.033157,
+        "mcse": 0.002547,
+        "bias_mcse": -13.015889
+      },
+      {
+        "arm": "A0w",
+        "model": "worldcover_2021",
+        "parameter": "UA_5",
+        "R_def": 5000,
+        "bias": -0.00322,
+        "mcse": 0.00025,
+        "bias_mcse": -12.884026
+      },
+      {
+        "arm": "A0w",
+        "model": "worldcover_2021",
+        "parameter": "area_1",
+        "R_def": 5000,
+        "bias": 0.000224,
+        "mcse": 5.3e-05,
+        "bias_mcse": 4.216376
+      },
+      {
+        "arm": "D",
+        "model": "dynamic_world_2021",
+        "parameter": "PA_1",
+        "R_def": 5000,
+        "bias": 0.024345,
+        "mcse": 0.001864,
+        "bias_mcse": 13.059732
+      },
+      {
+        "arm": "D",
+        "model": "dynamic_world_2021",
+        "parameter": "PA_4",
+        "R_def": 5000,
+        "bias": 0.049185,
+        "mcse": 0.002096,
+        "bias_mcse": 23.467179
+      },
+      {
+        "arm": "D",
+        "model": "dynamic_world_2021",
+        "parameter": "PA_5",
+        "R_def": 5000,
+        "bias": 0.006401,
+        "mcse": 0.001115,
+        "bias_mcse": 5.742273
+      },
+      {
+        "arm": "D",
+        "model": "dynamic_world_2021",
+        "parameter": "UA_1",
+        "R_def": 5000,
+        "bias": 0.003681,
+        "mcse": 0.000729,
+        "bias_mcse": 5.050095
+      },
+      {
+        "arm": "D",
+        "model": "dynamic_world_2021",
+        "parameter": "UA_4",
+        "R_def": 5000,
+        "bias": 0.021565,
+        "mcse": 0.001962,
+        "bias_mcse": 10.989052
+      },
+      {
+        "arm": "D",
+        "model": "esri_io_2021",
+        "parameter": "PA_1",
+        "R_def": 5000,
+        "bias": 0.023822,
+        "mcse": 0.001835,
+        "bias_mcse": 12.985282
+      },
+      {
+        "arm": "D",
+        "model": "esri_io_2021",
+        "parameter": "PA_4",
+        "R_def": 5000,
+        "bias": 0.022004,
+        "mcse": 0.000845,
+        "bias_mcse": 26.030669
+      },
+      {
+        "arm": "D",
+        "model": "esri_io_2021",
+        "parameter": "PA_5",
+        "R_def": 5000,
+        "bias": 0.006732,
+        "mcse": 0.001169,
+        "bias_mcse": 5.758681
+      },
+      {
+        "arm": "D",
+        "model": "esri_io_2021",
+        "parameter": "UA_1",
+        "R_def": 5000,
+        "bias": 0.003243,
+        "mcse": 0.000757,
+        "bias_mcse": 4.285333
+      },
+      {
+        "arm": "D",
+        "model": "esri_io_2021",
+        "parameter": "UA_4",
+        "R_def": 5000,
+        "bias": 0.004581,
+        "mcse": 0.000894,
+        "bias_mcse": 5.124644
+      },
+      {
+        "arm": "D",
+        "model": "worldcover_2021",
+        "parameter": "PA_1",
+        "R_def": 5000,
+        "bias": 0.020403,
+        "mcse": 0.001596,
+        "bias_mcse": 12.780182
+      },
+      {
+        "arm": "D",
+        "model": "worldcover_2021",
+        "parameter": "PA_4",
+        "R_def": 5000,
+        "bias": 0.044,
+        "mcse": 0.002038,
+        "bias_mcse": 21.594406
+      },
+      {
+        "arm": "D",
+        "model": "worldcover_2021",
+        "parameter": "PA_5",
+        "R_def": 5000,
+        "bias": 0.005162,
+        "mcse": 0.000779,
+        "bias_mcse": 6.629365
+      },
+      {
+        "arm": "D",
+        "model": "worldcover_2021",
+        "parameter": "UA_1",
+        "R_def": 5000,
+        "bias": 0.002612,
+        "mcse": 0.000639,
+        "bias_mcse": 4.085293
+      },
+      {
+        "arm": "D",
+        "model": "worldcover_2021",
+        "parameter": "UA_4",
+        "R_def": 5000,
+        "bias": 0.069633,
+        "mcse": 0.003189,
+        "bias_mcse": 21.831937
+      }
+    ]
+  }
+}

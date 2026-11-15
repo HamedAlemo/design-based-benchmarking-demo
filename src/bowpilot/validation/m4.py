@@ -72,8 +72,15 @@ def check_b2_total(ctx: Context, draws: int = 2000) -> dict:
             "pass": bool(abs(tot.mean() - ctx.N) <= 3 * mcse) if mcse > 0 else bool(np.isclose(tot.mean(), ctx.N))}
 
 
-def check_cluster_uniform(ctx: Context, draws: int = 20000) -> dict:
-    """Per-PSU selection frequency vs pi; |z| < 4 for every PSU."""
+def check_cluster_uniform(ctx: Context, draws: int = 20000, family_alpha: float = 0.01) -> dict:
+    """Per-PSU selection frequency vs pi (DECISIONS.md entry 24, approved by the PI).
+
+    Pass if every PSU has |z| below the Bonferroni limit Phi^-1(1 - alpha / (2 m)) over the m PSUs tested in the arm,
+    no eligible PSU is never selected, and in each stratum with at least 10 PSUs the SD of z is inside the two-sided
+    chi-square 0.001 band. (The per-stratum mean of z is exactly 0 by construction, so it is not tested.)
+    """
+    from scipy.stats import norm
+
     out = {}
     rng = _rng(3)
     for arm in ["A0", "A1", "B2"]:
@@ -86,12 +93,24 @@ def check_cluster_uniform(ctx: Context, draws: int = 20000) -> dict:
             cnt[psu] += 1
             pi_u[psu] = pi
         eligible = np.ones(m_units, bool) if arm != "A1" else ctx.chip_complete.astype(bool)
+        strat = ctx.tiles_meta["stratum"].to_numpy() if arm == "A0" else ctx.chip_tag
         sel = eligible & (pi_u > 0) & (pi_u < 1)
         p = pi_u[sel]
         z = (cnt[sel] / draws - p) / np.sqrt(p * (1 - p) / draws)
         never = int((eligible & (cnt == 0)).sum())
-        out[arm] = {"budget": b, "max_abs_z": float(np.abs(z).max()) if len(z) else 0.0, "n_psus": int(sel.sum()),
-                    "eligible_never_selected": never, "pass": bool((np.abs(z) < 4).all()) and never == 0}
+        limit = float(norm.ppf(1 - family_alpha / (2 * max(len(z), 1))))
+        sd_ok, sd_tab = True, {}
+        for s in np.unique(strat[sel]):
+            zz = z[strat[sel] == s]
+            if len(zz) >= 10:
+                lo, hi = np.sqrt(chi2.ppf([0.0005, 0.9995], len(zz) - 1) / (len(zz) - 1))
+                sd = float(zz.std(ddof=1))
+                sd_tab[str(int(s))] = {"n": len(zz), "sd_z": round(sd, 3), "band": [round(lo, 3), round(hi, 3)]}
+                sd_ok &= bool(lo <= sd <= hi)
+        out[arm] = {"budget": b, "max_abs_z": float(np.abs(z).max()) if len(z) else 0.0, "z_limit": limit,
+                    "n_psus": int(sel.sum()), "n_abs_z_gt_4": int((np.abs(z) > 4).sum()),
+                    "eligible_never_selected": never, "sd_by_stratum": sd_tab,
+                    "pass": bool((np.abs(z) < limit).all()) and never == 0 and sd_ok}
         if arm == "A1":
             out["A1"]["incomplete_ever_selected"] = int(cnt[~ctx.chip_complete.astype(bool)].sum())
     return out
