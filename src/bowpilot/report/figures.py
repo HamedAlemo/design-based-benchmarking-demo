@@ -164,7 +164,7 @@ def fig4_bridge(cfg: Config, est: pd.DataFrame) -> None:
              ("A0", "A0", fb["A0"][0], 0.0), ("A0w", "A0w", fb["A0w"][0], 0.0)]
     fig, ax = plt.subplots(figsize=(5.5, 3.0))
     prev = None
-    for i, (lab, arm, b, tau) in enumerate(steps):
+    for i, (_lab, arm, b, tau) in enumerate(steps):
         r = s[(s.arm == arm) & (s.budget == b) & (s.tau == tau) & (s.model == model)]
         if r.empty:
             continue
