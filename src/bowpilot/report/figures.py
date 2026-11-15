@@ -9,6 +9,7 @@ from __future__ import annotations
 import shutil
 
 import matplotlib
+import matplotlib.ticker
 
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt  # noqa: E402
@@ -54,7 +55,10 @@ def _short(cfg: Config) -> dict[str, str]:
 
 
 def fig1_estimates(cfg: Config, mc: pd.DataFrame, truth: pd.DataFrame, cvpr: pd.DataFrame | None) -> None:
+    """Typical replicate: among bootstrap-subset replicates (so macroF1 has a CI in design arms) where all panel
+    parameters are defined, the one whose OA estimate is closest to the arm's mean OA over all replicates."""
     keys = cfg.model_keys
+    n_boot = int(cfg.mc_profile["bootstrap_subset"])
     fb = fixed_budgets(cfg)
     params = [("OA", "OA"), ("macroF1", "macroF1"), ("UA_4", "UA barren")]
     tv = truth[truth.scope == "all"].set_index(["model", "parameter"])["value"]
@@ -69,8 +73,14 @@ def fig1_estimates(cfg: Config, mc: pd.DataFrame, truth: pd.DataFrame, cvpr: pd.
                 if g.empty:
                     continue
                 oa = g[g.parameter == "OA"].set_index("replicate")["estimate"]
-                rep = (oa - oa.mean()).abs().idxmin()          # typical replicate: OA closest to the arm mean
+                piv = g[g.parameter.isin([q for q, _ in params])].pivot_table(index="replicate", columns="parameter",
+                                                                             values="estimate", dropna=False)
+                ok = piv.index[(piv.index < n_boot) & piv.notna().all(axis=1)]
+                cand = oa.loc[ok] if len(ok) else oa
+                rep = (cand - oa.mean()).abs().idxmin()
                 row = g[(g.replicate == rep) & (g.parameter == p)].iloc[0]
+                if not np.isfinite(row.estimate):
+                    continue
                 c, m = STYLE[arm]
                 if np.isfinite(row.se):
                     ax.plot([row.ci_low, row.ci_high], [y, y], color=c, lw=1.4)
@@ -191,8 +201,14 @@ def fig5_study_area(cfg: Config) -> None:
 
     grid = Grid.from_json(cfg.interim_dir / "grid.json")
     f = max(1, int(np.ceil(max(grid.width, grid.height) / 1500)))
-    with rasterio.open(cfg.rasters_dir / "ref_class.tif") as s:
-        ref = s.read(1, out_shape=(grid.height // f, grid.width // f), resampling=rasterio.enums.Resampling.mode)
+    shape = (grid.height // f, grid.width // f)
+    nearest = rasterio.enums.Resampling.nearest
+    with rasterio.open(cfg.rasters_dir / "ref_class.tif") as s, rasterio.open(cfg.rasters_dir / "state.tif") as st, \
+            rasterio.open(cfg.rasters_dir / "ref_valid.tif") as va:
+        ref = s.read(1, out_shape=shape, resampling=nearest)
+        inpop = (st.read(1, out_shape=shape, resampling=nearest) > 0) & \
+            (va.read(1, out_shape=shape, resampling=nearest) == 100)
+    ref = np.where(inpop, ref, 0)
     ctx = Context(cfg)
     row, col = np.load(cfg.cells_dir / "row.npy", mmap_mode="r"), np.load(cfg.cells_dir / "col.npy", mmap_mode="r")
     sd = np.load(cfg.cells_dir / "strat_D.npy", mmap_mode="r")
@@ -205,7 +221,7 @@ def fig5_study_area(cfg: Config) -> None:
     fig, axes = plt.subplots(2, 3, figsize=(7.2, 5.0))
     cmap, norm = class_cmap()
     axes[0, 0].imshow(ref, cmap=cmap, norm=norm, interpolation="nearest")
-    axes[0, 0].set_title("Reference (10 m plurality)")
+    axes[0, 0].set_title("Reference, population cells")
     axes[0, 1].imshow(dmap, cmap=ListedColormap(plt.cm.tab20.colors[:11]), vmin=-0.5, vmax=10.5,
                       interpolation="nearest")
     axes[0, 1].set_title("D strata (consensus x agreement)")
@@ -236,7 +252,7 @@ def fig5_study_area(cfg: Config) -> None:
         ax.set_xticks([])
         ax.set_yticks([])
     fig.suptitle(f"Figure 5. Study area ({cfg.extent} extent) and one draw per design", fontsize=8)
-    fig.tight_layout()
+    fig.tight_layout(h_pad=2.0)
     _save(cfg, fig, "fig5_study_area")
 
 
@@ -252,6 +268,11 @@ def fig6_efficiency(cfg: Config, eff: pd.DataFrame) -> None:
             ax.plot(gg.index * 3, gg["mean_ci_width_F"], ls=ls, marker=STYLE["F"][1], color=STYLE["F"][0],
                     label=f"F {prefix}")
         ax.set_xscale("log")
+        b = sorted(g["budget"].unique())
+        ticks = sorted(set(b) | {3 * x for x in b})
+        ax.set_xticks(ticks)
+        ax.set_xticklabels([f"{x:,}" for x in ticks], rotation=45, fontsize=6)
+        ax.xaxis.set_minor_locator(matplotlib.ticker.NullLocator())
         ax.set_title(cfg.model_short[k])
         ax.set_xlabel("total labels (D: n, F: 3n)")
     np.atleast_1d(axes)[0].set_ylabel("mean 95% CI width (avg over classes)")
