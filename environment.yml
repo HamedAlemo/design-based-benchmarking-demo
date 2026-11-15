@@ -1,0 +1,34 @@
+name: bowpilot
+channels:
+  - conda-forge
+dependencies:
+  - python=3.11
+  - numpy
+  - scipy
+  - pandas
+  - pyarrow
+  - xarray
+  - rioxarray
+  - rasterio
+  - gdal
+  - geopandas
+  - shapely>=2
+  - pyproj
+  - dask
+  - joblib
+  - pystac-client
+  - planetary-computer
+  - earthengine-api
+  - requests
+  - tqdm
+  - pyyaml
+  - matplotlib
+  - seaborn
+  - pytest
+  - ruff
+  - typer
+  - r-base
+  - r-survey
+  - pip
+  - pip:
+      - sciencebasepy

@@ -1,0 +1,87 @@
+# The nine sampling arms. See docs/PROTOCOL.md section 5 and contracts.py.
+# "draws_from" means the arm reuses another arm's sample in the same replicate (paired by construction).
+
+arms:
+  A0:
+    group: conventional
+    frame: tiles
+    selection: srs_tiles_per_state
+    budgets: {tiles_per_state: [5, 10, 20]}
+    estimator: naive_pooled            # unweighted pooled pixels; binomial SE; McNemar for pairs
+  A0w:
+    group: repair
+    draws_from: A0
+    estimator: design_cluster          # HT weights by state, one-stage stratified cluster variance (PSU = tile)
+  A1:
+    group: conventional
+    frame: chips_complete
+    selection: equal_per_rare_tag
+    budgets: {chips: [50, 100, 200]}
+    purity_thresholds: [0.75, 0.9, 1.0]
+    estimator: naive_pooled            # plus chip-averaged mIoU as a secondary conventional metric
+  B1:
+    group: repair
+    draws_from: A1
+    purity_thresholds: [0.0, 0.75, 0.9, 1.0]
+    estimator: design_cluster          # correct chip weights M_tag / n_tag; purity filter kept
+  B2:
+    group: repair
+    frame: chips_all
+    selection: equal_per_rare_tag
+    budgets: {chips: [50, 100, 200]}
+    purity_thresholds: [0.0]
+    estimator: design_cluster
+  C:
+    group: design
+    frame: cells
+    selection: srs_cells
+    budgets: {n: [500, 1000, 2000]}
+    estimator: design_element
+  D:
+    group: design
+    frame: cells
+    selection: stratified_cells
+    strata: product_agreement          # consensus class x agreement level, up to 11 strata
+    allocation:
+      min_per_stratum: "min(50, floor(n / (2 * H)))"
+      remainder: neyman_assumed
+      assumed_error_rate: {agree3: 0.05, agree2: 0.40, no_majority: 0.60}
+    budgets: {n: [500, 1000, 2000]}
+    estimator: design_element          # Stehman (2014): strata differ from map classes
+  D2:
+    group: design
+    frame: cells
+    selection: stratified_cells
+    strata: state_x_epa_l3_ecoregion
+    # US EPA Level III ecoregions of the conterminous US (shapefile "us_eco_l3"), from the EPA ecoregions page
+    # (https://www.epa.gov/eco-research/level-iii-and-iv-ecoregions-continental-united-states).
+    # M1 locates the current download link and records it in docs/DECISIONS.md.
+    ecoregion_source: "epa_us_eco_l3"
+    merge_small_strata_below_fraction: 0.005   # strata under 0.5% of N merge into "<state>_other"
+    allocation:
+      min_per_stratum: "min(30, floor(n / (2 * H)))"
+      remainder: proportional
+    budgets: {n: [500, 1000, 2000]}
+    estimator: design_element
+  E:
+    group: mistake
+    draws_from: D
+    estimator: naive_unweighted        # D's sample, equal weights, binomial SE, McNemar for pairs
+  F:
+    group: per_model_reference
+    frame: cells
+    selection: stratified_cells
+    strata: own_map_class              # one independent sample per model, strata = that model's classes 0..5
+    allocation:
+      min_per_stratum: "min(50, floor(n / (2 * H)))"
+      remainder: proportional
+    budgets: {n: [500, 1000, 2000]}    # per model; total cost = K x n
+    estimator: design_element
+
+# Dev-extent overrides: the dev extent has only a few dozen tiles, too few for 20 per state.
+dev_overrides:
+  A0: {budgets: {tiles_per_state: [2, 3, 5]}}
+
+# The actual CVPR 2019 test split (20 MD + 20 DE test tiles) is evaluated once as a fixed realization with both
+# the A0 and A0w estimators and marked on figures as "the real benchmark".
+evaluate_actual_cvpr_test_split: true

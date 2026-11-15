@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "bowpilot"
+version = "0.1.0"
+description = "Design-based vs conventional benchmarking pilot for GeoAI land cover maps (Benchmarks of the World)"
+requires-python = ">=3.11"
+
+[project.scripts]
+bowpilot = "bowpilot.cli:app"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.ruff]
+line-length = 120
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP", "NPY"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

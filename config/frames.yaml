@@ -1,0 +1,33 @@
+# Sampling frames for cluster arms. See docs/PROTOCOL.md section 5.
+
+tiles:
+  # Primary sampling units for A0 / A0w: the Chesapeake CVPR 2019 tile geometry (USGS quarter quadrangles,
+  # about 6 km x 7.5 km). The actual CVPR tiles are a sample from this frame; the frame itself is the full
+  # quarter-quadrangle grid over MD and DE.
+  cvpr_spatial_index:
+    # EPSG:3857 polygons with split attributes (train / val / test) and state-year folder names.
+    urls:
+      - "https://lilawildlife.blob.core.windows.net/lila-wildlife/lcmcvpr2019/cvpr_chesapeake_landcover/spatial_index.geojson"
+      - "gs://public-datasets-lila/lcmcvpr2019/cvpr_chesapeake_landcover/spatial_index.geojson"
+    keep_prefixes: ["md_1m_2013", "de_1m_2013"]
+  quarter_quad_grid:
+    # 3.75 arc-minute cells aligned to whole degrees (USGS quarter quadrangles), built in EPSG:4269 / 4326.
+    step_deg: 0.0625
+    # CVPR tiles are debuffered NAIP quarter-quad footprints stored in UTM, so their corners will not hit grid corners
+    # exactly. M2 matches each CVPR MD/DE tile to the grid cell containing its centroid and requires IoU >= 0.8
+    # (computed in EPSG:5070). Datum for the grid: NAD83 (EPSG:4269); try EPSG:4326 only if matching fails.
+    grid_crs: "EPSG:4269"
+    match_min_iou: 0.8
+    max_unmatched_fraction: 0.05   # above this, stop and diagnose (human gate after two attempts)
+  # Tile membership: a population cell belongs to the tile whose polygon contains its center.
+  # Tile stratum (state): the state holding the most population cells of that tile.
+  # Tiles with zero population cells are not in the frame.
+
+chips:
+  # Chips for A1 / B1 / B2: square blocks of the analysis grid.
+  size_cells: 64            # 640 m x 640 m
+  origin_multiple_m: 640
+  # A "complete" chip has all 64 x 64 cells in the population (used by A1 and B1 eligibility).
+  # B2 uses every chip with at least one population cell.
+  rare_tag_min_fraction: 0.05   # tag = rarest population class covering >= 5% of the chip's population cells
+  purity_thresholds: [0.0, 0.75, 0.9, 1.0]   # 0.0 = no purity filter (used for the B1 decomposition)

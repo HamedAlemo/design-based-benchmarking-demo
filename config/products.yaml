@@ -1,0 +1,39 @@
+# Models evaluated in phase 1: existing 10 m land cover products for 2021. See docs/PROTOCOL.md section 3.
+# Every product is resampled to the analysis grid (config/extent.yaml) by nearest neighbor. The reference is never
+# resampled to a product grid.
+
+models:
+  - key: worldcover_2021
+    short: WC
+    label: "ESA WorldCover 2021 v200"
+    access: planetary_computer
+    stac_collection: "esa-worldcover"
+    stac_filter: {"esa_worldcover:product_version": "2.0.0"}
+    asset: "map"
+    fallback_access: "s3://esa-worldcover/v200/2021/map/ (public, no sign request)"
+
+  - key: dynamic_world_2021
+    short: DW
+    label: "Dynamic World V1, 2021 annual mode of label"
+    access: earth_engine
+    gee_collection: "GOOGLE/DYNAMICWORLD/V1"
+    gee_project: null           # set here or via env GEE_PROJECT
+    date_start: "2021-01-01"
+    date_end: "2022-01-01"      # exclusive
+    band: "label"
+    reducer: "mode"             # ee.Reducer.mode(); pixels with no observations are masked -> class 0
+    # Primary download path: ee.data.computePixels in blocks on the analysis grid (no Drive or GCS needed).
+    # Fallback: ee.batch.Export.image.toCloudStorage or toDrive with the same crs and crsTransform.
+    block_size_cells: 1024
+
+  - key: esri_io_2021
+    short: IO
+    label: "Esri / Impact Observatory 10m Annual LULC v02, 2021"
+    access: planetary_computer
+    stac_collection: "io-lulc-annual-v02"
+    stac_datetime: "2021-01-01/2021-12-31"
+    asset: "data"
+    fallback_access: "s3://io-10m-annual-lulc/ (public, no sign request)"
+
+# Phase 2 (M7, optional, not part of the first run): foundation-model probe maps.
+phase2_enabled: false

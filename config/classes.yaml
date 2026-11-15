@@ -1,0 +1,77 @@
+# Harmonized classes and crosswalks. See docs/PROTOCOL.md section 2 and 3.
+# Code 0 is reserved for "no prediction" in model maps (nodata, cloud, snow). It always counts as wrong.
+
+harmonized:
+  1: water
+  2: tree_canopy
+  3: low_vegetation
+  4: barren
+  5: impervious
+
+reference:
+  product: "Chesapeake Bay Land Use/Land Cover Database 2024 Edition, land cover (LC) layer, 2021/22"
+  doi: "10.5066/P14BEBRC"
+  # Match by CLASS NAME from the product's data dictionary or raster attribute table, never by assumed code.
+  # M1 fills `observed_codes` from the data and fails (human gate) if any observed name is not listed below.
+  name_to_harmonized:
+    "Water": 1
+    "Emergent Wetlands": 3
+    "Tree Canopy": 2
+    "Scrub/Shrub": 3
+    "Low Vegetation": 3
+    "Barren": 4
+    "Impervious Structures": 5
+    "Other Impervious": 5
+    "Impervious Roads": 5
+    "Tree Canopy over Impervious Structures": 2
+    "Tree Canopy over Other Impervious": 2
+    "Tree Canopy over Impervious Roads": 2
+  # Names that may appear with slightly different wording. M1 may normalize case, punctuation and "Surfaces"
+  # suffixes, and must log every normalization in docs/DECISIONS.md.
+  allow_name_normalization: true
+  # If the release has no separate LC raster, M1 derives the 5 classes from the LULC raster using the data
+  # dictionary's land cover parent of each LULC class, writes the full mapping here under `lulc_to_harmonized`,
+  # and records the decision. This is a human gate only if any LULC class has no clear land cover parent.
+  lulc_to_harmonized: null
+  observed_codes: null   # filled by M1: {code: "name"}
+  nodata: null           # filled by M1
+
+products:
+  worldcover_2021:
+    # ESA WorldCover v200 codes
+    10: 2   # tree cover
+    20: 3   # shrubland
+    30: 3   # grassland
+    40: 3   # cropland
+    50: 5   # built-up
+    60: 4   # bare / sparse vegetation
+    70: 0   # snow and ice -> no prediction
+    80: 1   # permanent water bodies
+    90: 3   # herbaceous wetland
+    95: 3   # mangroves (not expected here)
+    100: 3  # moss and lichen (not expected here)
+    0: 0    # nodata
+  dynamic_world_2021:
+    # Dynamic World V1 label band codes; we use the annual mode of `label`
+    0: 1    # water
+    1: 2    # trees
+    2: 3    # grass
+    3: 3    # flooded vegetation
+    4: 3    # crops
+    5: 3    # shrub and scrub
+    6: 5    # built
+    7: 4    # bare
+    8: 0    # snow and ice -> no prediction
+    masked: 0
+  esri_io_2021:
+    # Impact Observatory / Esri 10m Annual LULC v02 (9-class) codes
+    1: 1    # water
+    2: 2    # trees
+    4: 3    # flooded vegetation
+    5: 3    # crops
+    7: 5    # built area
+    8: 4    # bare ground
+    9: 0    # snow/ice -> no prediction
+    10: 0   # clouds -> no prediction
+    11: 3   # rangeland
+    0: 0    # nodata

@@ -1,0 +1,32 @@
+# Monte Carlo settings. See docs/PROTOCOL.md section 7.
+
+base_seed: 20261115
+
+profiles:
+  dev:
+    replicates: 50
+    bootstrap_subset: 10        # replicates that also get the Rao-Wu bootstrap (F1, IoU, F1 differences)
+    bootstrap_B: 50
+  full:
+    replicates: 1000
+    bootstrap_subset: 200
+    bootstrap_B: 200
+
+confidence_level: 0.95
+ci_method: wald                 # logit-scale intervals reported as a sensitivity check for rare-class UA/PA
+
+parameters:
+  # Computed for every model in every replicate where the arm supports them.
+  - OA
+  - UA_c                        # c = 1..5
+  - PA_c
+  - F1_c
+  - macroF1
+  - IoU_c
+  - mIoU
+  - area_c                      # reference class proportion p_{+c} (model-free)
+
+pairwise_metrics_linearized: [OA]            # all replicates
+pairwise_metrics_bootstrap: [macroF1, F1_c]  # bootstrap subset only
+
+outputs_dir: results/mc

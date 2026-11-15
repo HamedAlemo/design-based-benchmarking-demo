@@ -1,0 +1,33 @@
+# Population extent and analysis grid. See docs/PROTOCOL.md section 2.
+
+active: dev            # dev | full. Every pipeline step reads this unless overridden on the CLI.
+
+grid:
+  # Equal-area grid so that every cell has the same area (design-based area proportions assume equal-area units).
+  # EPSG:5070 is expected to be the reference product's native CRS. M1 must verify this.
+  # If the reference uses a different equal-area CRS, adopt the reference CRS and log it in docs/DECISIONS.md.
+  crs: "EPSG:5070"
+  cell_size_m: 10
+  # Cell edges sit on multiples of 10 m. With a reference aligned to integer meters, each 10 m cell is exactly 10 x 10 reference pixels.
+  origin_multiple_m: 10
+
+states:
+  - {name: Maryland, abbr: MD, fips: "24", code: 1}
+  - {name: Delaware, abbr: DE, fips: "10", code: 2}
+
+boundaries:
+  # Census cartographic boundary file: generalized and clipped to the shoreline, so open Chesapeake Bay and ocean
+  # water is outside the population. Inland and near-shore water inside the boundary is in.
+  source: "https://www2.census.gov/geo/tiger/GENZ2021/shp/cb_2021_us_state_500k.zip"
+
+population_rules:
+  # A 10 m cell is in the population if (a) its center is inside MD or DE, and (b) all 100 underlying 1 m reference
+  # pixels are valid (not nodata). Cells failing (b) are counted and reported, never imputed.
+  require_full_reference_coverage: true
+
+extents:
+  dev:
+    # About 35 km x 33 km across the MD-DE border (Caroline and Queen Anne's MD, Kent DE). Two states, mixed land cover.
+    bbox_lonlat: [-75.95, 38.85, -75.55, 39.15]
+  full:
+    bbox_lonlat: null   # null = the full MD + DE boundary
