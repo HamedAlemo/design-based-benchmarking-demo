@@ -217,20 +217,24 @@ def tables(ctx: Context) -> dict:
     return {"allocation": {k: v.to_dict("records") for k, v in alloc.items()}, "cluster_pi": pis}
 
 
-def run_m4(cfg: Config, uniform_draws: int = 20000, b2_draws: int = 2000) -> dict:
+def run_m4(cfg: Config, uniform_draws: int = 20000, b2_draws: int = 2000, speed_only: bool = False) -> dict:
+    """All M4 checks; with speed_only (full extent) the sizes/weights, pairing, speed checks and tables only."""
     ctx = Context(cfg)
     res = {}
-    for name, fn in [("sizes_weights", lambda: check_sizes_and_weights(ctx)),
+    checks = [("sizes_weights", lambda: check_sizes_and_weights(ctx)),
                      ("b2_total", lambda: check_b2_total(ctx, b2_draws)),
                      ("cluster_uniform", lambda: check_cluster_uniform(ctx, uniform_draws)),
                      ("element_uniform", lambda: check_element_uniform(ctx, uniform_draws)),
                      ("pairing_determinism", lambda: check_pairing_and_determinism(ctx)),
                      ("speed", lambda: check_speed(ctx)),
-                     ("tables", lambda: tables(ctx))]:
+                     ("tables", lambda: tables(ctx))]
+    if speed_only:
+        checks = [c for c in checks if c[0] in ("sizes_weights", "pairing_determinism", "speed", "tables")]
+    for name, fn in checks:
         t0 = time.time()
         res[name] = fn()
         log.info("M4 %s done in %.1fs", name, time.time() - t0)
     out = cfg.results_dir / "validation"
     out.mkdir(parents=True, exist_ok=True)
-    (out / "m4.json").write_text(json.dumps(res, indent=2, default=str))
+    (out / ("m4_speed.json" if speed_only else "m4.json")).write_text(json.dumps(res, indent=2, default=str))
     return res

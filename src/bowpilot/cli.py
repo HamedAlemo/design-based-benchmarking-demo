@@ -41,12 +41,12 @@ def validate_estimators(extent: str = ExtentOpt, draws: int = typer.Option(5000)
 
 
 @app.command("validate-sampling")
-def validate_sampling(extent: str = ExtentOpt) -> None:
+def validate_sampling(extent: str = ExtentOpt, speed_only: bool = typer.Option(False, "--speed-only")) -> None:
     """M4: sampler validation (sizes, weights, uniformity, pairing, determinism, speed)."""
     cfg = load_config(extent)
     setup_logging(f"M4_{cfg.extent}")
     from bowpilot.validation.m4 import run_m4
-    run_m4(cfg)
+    run_m4(cfg, speed_only=speed_only)
 
 
 @app.command()
