@@ -17,6 +17,7 @@ This repository is built to be developed by Claude Code, mostly unattended. Huma
 | `config/` | All tunable choices: extent, classes and crosswalks, products, frames, arms, Monte Carlo. |
 | `src/bowpilot/contracts.py` | Data contracts every module must honor (samples, designs, estimates). |
 | `reports/` | Milestone reports written by Claude Code. Read these. |
+| `reports/EXPERIMENT_OVERVIEW.md` | One-document explanation of all experiments, assumptions and results. Start here. |
 
 ## Pre-flight checklist (do this on the target laptop before dispatching)
 
