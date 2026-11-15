@@ -1,0 +1,16 @@
+scope,model,parameter,value
+all,worldcover_2021,maparea_1,0.05308923625920749
+all,worldcover_2021,maparea_2,0.5376462912006079
+all,worldcover_2021,maparea_3,0.358729533640316
+all,worldcover_2021,maparea_4,0.002444362640513237
+all,worldcover_2021,maparea_5,0.04809057625935534
+all,dynamic_world_2021,maparea_1,0.05993549106321432
+all,dynamic_world_2021,maparea_2,0.5332004703721159
+all,dynamic_world_2021,maparea_3,0.2611837818006807
+all,dynamic_world_2021,maparea_4,0.0022580991968673045
+all,dynamic_world_2021,maparea_5,0.14334905722860533
+all,esri_io_2021,maparea_1,0.055451937684682616
+all,esri_io_2021,maparea_2,0.4198666627465431
+all,esri_io_2021,maparea_3,0.31615208020914465
+all,esri_io_2021,maparea_4,0.000807771773488704
+all,esri_io_2021,maparea_5,0.20772125866440944

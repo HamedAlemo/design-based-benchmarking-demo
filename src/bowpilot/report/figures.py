@@ -129,6 +129,7 @@ def fig2_ranking(cfg: Config, rank: pd.DataFrame, cells: pd.DataFrame) -> None:
         ax.set_xscale("log")
         ax.set_xlabel("labelled cells per draw (log)")
     axes[0].set_ylabel("P(true best model on OA)")
+    axes[0].set_ylim(0, 1.03)
     axes[1].set_ylabel("Type S rate, OA pairs")
     axes[1].axhline(0.025, ls="--", color="k", lw=0.8)
     axes[0].legend(ncol=2, frameon=False, loc="lower right")
@@ -218,7 +219,8 @@ def fig5_study_area(cfg: Config) -> None:
     ok = (rr < dmap.shape[0]) & (cc < dmap.shape[1])
     dmap[rr[ok], cc[ok]] = np.asarray(sd[sub])[ok]
     rng = np.random.Generator(np.random.PCG64(cfg.base_seed + 5))
-    fig, axes = plt.subplots(2, 3, figsize=(7.2, 5.0))
+    aspect = ref.shape[0] / ref.shape[1]
+    fig, axes = plt.subplots(2, 3, figsize=(7.2, max(2.6, 2 * 2.3 * aspect + 0.8)))
     cmap, norm = class_cmap()
     axes[0, 0].imshow(ref, cmap=cmap, norm=norm, interpolation="nearest")
     axes[0, 0].set_title("Reference, population cells")
